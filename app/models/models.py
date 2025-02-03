@@ -4,6 +4,14 @@ from datetime import date, time
 
 
 class Item(BaseModel):
+    """
+    A class representing an item in a receipt which inherits the Pydantic BaseModel.
+
+    Attributes:
+        shortDescription (str): The description of the item
+        price (str): The price of the item
+    """
+
     shortDescription: str = Field(
         title="The Short Product Description for the item.", 
         example="Mountain Dew 12PK"
@@ -15,18 +23,43 @@ class Item(BaseModel):
 
 
 class ReceiptIdResponse(BaseModel):
+    """
+    A class representing the response object for the endpoint /receipts/process
+    which inherits the Pydantic BaseModel
+
+    Attributes:
+        id (str): The generated ID for the receipt
+    """
     id: str = Field(
         title="Id of the receipt", example="7fb1377b-b223-49d9-a31a-5a02701dd310"
     )
 
 
 class ReceiptPointsResponse(BaseModel):
+    """
+    A class representing the response object for the endpoint /receipts/{id}/points
+    which inherits the Pydantic BaseModel
+
+    Attributes:
+        points (str): The points awarded to the receipt with ID id
+    """
     points: str = Field(
         title="Points awarded to the receipt", example=32
     )
 
 
 class ReceiptRequest(BaseModel):
+    """
+    A class representing the receipt which inherits the Pydantic BaseModel
+
+    Attributes:
+        retailer (str): The name of the retailer
+        purchaseDate (date): The date of purchase
+        purchaseTime (time): The time of purchase
+        items (List[Item]): List of items on the receipt
+        total (str): The total amount paid on the receipt
+    """
+
     retailer: str = Field(
         title="The name of the retailer or store the receipt is from.", 
         example="M&M Corner Market"
